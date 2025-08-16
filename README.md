@@ -33,6 +33,62 @@ cd Backend
 Configure the Database:
 Open the file: src/main/resources/application.properties
 Update the following lines with your own database details. You must create a database named crowny_hotel_db first.
+
+Set Up the Database
+
+You have two options to set up the database. The recommended method is to restore from the provided backup file.
+
+Option A: Restore from Backup (Recommended)
+
+This is the fastest way to get the exact database structure and sample data.
+
+Make sure your MySQL server is running.
+
+Unzip the backup file located in the /Database folder of this project. You should get a file named crowny_hotel_dump.sql.
+
+Log in to MySQL and create a new, empty database:
+
+code
+SQL
+download
+content_copy
+expand_less
+IGNORE_WHEN_COPYING_START
+IGNORE_WHEN_COPYING_END
+CREATE DATABASE crowny_hotel_db;
+
+From your command line (CMD or Terminal), run the following command to import the data from the dump file. You will be prompted for your MySQL password.
+
+code
+Bash
+download
+content_copy
+expand_less
+IGNORE_WHEN_COPYING_START
+IGNORE_WHEN_COPYING_END
+mysql -u [your_db_username] -p crowny_hotel_db < Database/crowny_hotel_dump.sql
+
+Replace [your_db_username] with your actual MySQL username (e.g., root).
+
+Option B: Create the Database Manually
+
+If you prefer to start with a completely empty database:
+
+Make sure your MySQL server is running.
+
+Log in to MySQL and run the following command:
+
+code
+SQL
+download
+content_copy
+expand_less
+IGNORE_WHEN_COPYING_START
+IGNORE_WHEN_COPYING_END
+CREATE DATABASE crowny_hotel_db;
+
+The Spring Boot application will automatically create the necessary tables when it starts for the first time.
+
 code
 Properties
 spring.datasource.url=jdbc:mysql://localhost:3306/crowny_hotel_db
@@ -61,6 +117,7 @@ code
 Bash
 npm start
 ✅ The website will open automatically in your browser at http://localhost:3000
+
 
 📖 API Documentation with Swagger
 To facilitate testing and exploration of the API, this project uses Swagger UI. Swagger provides interactive API documentation, allowing you to view and test every endpoint directly from your browser.
