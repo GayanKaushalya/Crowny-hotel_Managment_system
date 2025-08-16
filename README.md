@@ -38,7 +38,7 @@ Set Up the Database
 
 You have two options to set up the database. The recommended method is to restore from the provided backup file.
 
-Option A: Restore from Backup (Recommended)
+Option - Restore from Backup (Recommended)
 
 This is the fastest way to get the exact database structure and sample data.
 
@@ -70,24 +70,6 @@ mysql -u [your_db_username] -p crowny_hotel_db < Database/crowny_hotel_dump.sql
 
 Replace [your_db_username] with your actual MySQL username (e.g., root).
 
-Option B: Create the Database Manually
-
-If you prefer to start with a completely empty database:
-
-Make sure your MySQL server is running.
-
-Log in to MySQL and run the following command:
-
-code
-SQL
-download
-content_copy
-expand_less
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
-CREATE DATABASE crowny_hotel_db;
-
-The Spring Boot application will automatically create the necessary tables when it starts for the first time.
 
 code
 Properties
