@@ -1,6 +1,9 @@
 package com.crownydev.CrownyHotel.security;
 
 import com.crownydev.CrownyHotel.service.CustomUserDetailsService;
+import io.swagger.v3.oas.models.OpenAPI; // <-- ADD THIS IMPORT
+import io.swagger.v3.oas.models.info.Info;   // <-- ADD THIS IMPORT
+import io.swagger.v3.oas.models.info.License; // <-- ADD THIS IMPORT
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,13 +24,9 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 
-/**
- * This is the main security configuration class for the application.
- * It brings together all the security components and defines the rules.
- */
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity // This enables method-level security checks like @PreAuthorize
+@EnableMethodSecurity
 public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
@@ -37,20 +36,6 @@ public class SecurityConfig {
         this.customUserDetailsService = customUserDetailsService;
         this.jwtAuthFilter = jwtAuthFilter;
     }
-
-    /**
-     * The SecurityFilterChain is the core of Spring Security's configuration.
-     * It defines the security rules for all HTTP requests.
-     */
-    // Inside your SecurityConfig.java file
-
-    // In your SecurityConfig.java file
-
-    // In your SecurityConfig.java file
-
-    // In your SecurityConfig.java file
-
-    // PASTE THIS ENTIRE METHOD INTO YOUR SecurityConfig.java, REPLACING THE OLD ONE
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -70,7 +55,11 @@ public class SecurityConfig {
                         "/rooms/all",
                         "/rooms/types",
                         "/rooms/available-rooms-by-date-and-type",
-                        "/bookings/confirmation/**"
+                        "/bookings/confirmation/**",
+                        "/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html"
+
                 ).permitAll()
 
                 // 2. ADMIN-ONLY Endpoints (Specific admin actions)
@@ -84,14 +73,13 @@ public class SecurityConfig {
                 ).hasAuthority("ADMIN")
 
                 // 3. AUTHENTICATED User Endpoints (Any logged-in user, USER or ADMIN)
-                //    This new rule fixes the error by allowing users to see room details.
                 .requestMatchers(
                         "/users/my-info",
                         "/users/update/**",
                         "/bookings/user/**",
                         "/bookings/book-room/**",
                         "/bookings/cancel/**",
-                        "/rooms/{roomId}" // <-- FIX: Allows access to GET /rooms/2, etc.
+                        "/rooms/{roomId}"
                 ).authenticated()
 
                 // 4. CATCH-ALL: Any other request not listed above requires authentication.
@@ -101,9 +89,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-    /**
-     * This bean defines our CORS (Cross-Origin Resource Sharing) policy.
-     */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -116,9 +101,6 @@ public class SecurityConfig {
         return source;
     }
 
-    /**
-     * This bean defines the custom Authentication Provider.
-     */
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
@@ -126,19 +108,24 @@ public class SecurityConfig {
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
     }
-    /**
-     * This bean defines the password hashing algorithm.
-     */
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    /**
-     * This bean exposes the AuthenticationManager.
-     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("CrownyHotel API")
+                        .version("1.0")
+                        .description("This is the API documentation for the CrownyHotel backend services. It provides endpoints for managing users, rooms, and bookings.")
+                        .license(new License().name("Apache 2.0").url("http://springdoc.org")));
+    }
+
 }

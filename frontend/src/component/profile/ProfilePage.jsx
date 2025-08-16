@@ -45,9 +45,9 @@ const ProfilePage = () => {
     };
 
    // THIS IS THE NEW, CORRECT CODE
-const handleEditProfile = () => {
+    const handleEditProfile = () => {
     navigate('/edit-profile');
-};
+    };
 
     return (
         <div className="profile-page">

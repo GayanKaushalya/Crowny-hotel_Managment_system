@@ -1,5 +1,3 @@
-// PASTE THIS FULL CODE INTO YOUR BookingRepository.java FILE
-
 package com.crownydev.CrownyHotel.repo;
 
 import com.crownydev.CrownyHotel.entity.Booking;
