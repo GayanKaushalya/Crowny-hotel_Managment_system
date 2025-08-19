@@ -38,7 +38,7 @@ Set Up the Database
 
 You have two options to set up the database. The recommended method is to restore from the provided backup file.
 
-Option - Restore from Backup (Recommended)
+Restore from Backup (Recommended)
 
 This is the fastest way to get the exact database structure and sample data.
 

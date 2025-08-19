@@ -1,4 +1,4 @@
-// PASTE THIS FULL CODE INTO YOUR ProfilePage.jsx FILE
+
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';

@@ -1,4 +1,3 @@
-// PASTE THIS FULL CODE INTO YOUR Utils.java FILE
 
 package com.crownydev.CrownyHotel.utils;
 

@@ -1,4 +1,3 @@
-// PASTE THIS FULL CODE INTO YOUR User.java FILE
 
 package com.crownydev.CrownyHotel.entity;
 

@@ -1,4 +1,3 @@
-// PASTE THIS FULL CODE INTO YOUR ApiService.js FILE
 
 import axios from "axios"
 
@@ -164,7 +163,7 @@ export default class ApiService {
     /** ========================= AUTHENTICATION CHECKER ========================= */
     
    // In ApiService.js
-// REPLACE your old logout function with this one
+
 
     static logout() {
         localStorage.removeItem('token');

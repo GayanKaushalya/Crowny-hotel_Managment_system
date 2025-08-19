@@ -1,10 +1,10 @@
-// PASTE THIS FULL CODE INTO YOUR HomePage.jsx FILE
+
 
 import React, { useState } from "react";
 import RoomResult from "../common/RoomResult";
 import RoomSearch from "../common/RoomSearch";
 
-// --- STEP 1: Import Swiper for the carousels ---
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 // Import Swiper styles
